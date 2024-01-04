@@ -1,0 +1,20 @@
+load("@rules_python//python:pip.bzl", "compile_pip_requirements")
+load("@pip//:requirements.bzl", "requirement")
+
+compile_pip_requirements(
+    name = "requirements",
+    src = "requirements.in",
+    requirements_darwin = "requirements_darwin.txt",
+    requirements_windows = "requirements_windows.txt",
+    requirements_linux = "requirements_linux.txt",
+)
+
+py_test(
+    name = "test_has_comment",
+    srcs = ["test_has_comment.py"],
+    deps = [
+        requirement("pyqt6"),
+        requirement("wheel"),
+    ],
+)
+
